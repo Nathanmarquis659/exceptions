@@ -2,7 +2,10 @@ import java.io.*;
 import java.util.*;
 
 /** 
- * Description
+ * Take in a list of filenames and print their name as well as any exceptions encountered and if they
+ * are formatted as described by the formatCheck() method. Files should have 2 integers in the header
+ * for the rows and columns expected. The following lines should have the exact number of double values
+ * matching the header rows/columns. 
  * 
  * @author Nathan Marquis
  */
@@ -10,19 +13,21 @@ import java.util.*;
 public class FormatChecker {
 
     /**
-     1) open file
-     2) parse contents
-     3) check if fits criteria (rows/columns and also doubles ONLY)
+     * Serve 3 primary functions:
+     * 1) Attempt to open given file
+     * 2) Parse the contents of said file line by line
+     * 3) Check for proper formatting: 
+     *      a) That the first line has 2 integers for the number of rows and columns expected.
+     *      b) That there are the exact number of rows and columns described in the first line
+     *      c) That each value after the first line is a double type
      * 
-     * @param filename is a String used to open a file to read
+     * @param filename a String with the name of the file to be opened
      * 
-     * @return returns a boolean of whether or not the file is properly formatted (correct header ,
-     *  # of rows/columns , and data)
+     * @return a true boolean if the file is properly formatted, else return false
      * 
      * @throws FileNotFoundException if the file does not exist
      * @throws NumberFormatException if a number is assigned to the wrong type
-     * @throws Exception if there is a formatting issue such as: Incorrect number of arguments in first line, 
-     * Too few rows, Incorrect number of columns, or Too many rows. Will also catch all other exceptions
+     * @throws Exception if there is a formatting issue; will also throw all other exceptions
      */
     private static boolean formatCheck(String filename) throws FileNotFoundException, NumberFormatException, Exception {
         boolean valid = false;
@@ -70,6 +75,15 @@ public class FormatChecker {
         return valid;
     }
     
+    /**
+     * Take in a list of filenames, then print out each filename as well as a brief explanation of 
+     * potential exceptions encountered and whether the file is VALID or INVALID according formatCheck().
+     * 
+     * Print a usage message if there are no arguments, then return
+     * 
+     * @param args a String list of filenames that will be checked using formatCheck() to find whether 
+     * valid or not
+     */
     public static void main(String[] args) {
 
         String usageMessage = "Usage: $ java FormatChecker file1 [file2...fileN]";
